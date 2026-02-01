@@ -2,10 +2,11 @@ package lib
 
 import (
 	"errors"
+	"log"
+
 	"github.com/acheong08/apple-corelocation-experiments/lib/distance"
 	"github.com/acheong08/apple-corelocation-experiments/lib/morton"
 	"github.com/acheong08/apple-corelocation-experiments/lib/spiral"
-	"log"
 )
 
 const ErrInvalidInput = "invalid input"
@@ -66,6 +67,7 @@ func SearchProximity(lat, long float64, limit uint8, options ...Modifier) ([]dis
 				Y:  device.Location.Lat,
 				X:  device.Location.Long,
 			}
+			log.Println(device.BSSID, ",", device.Location.Lat, ",", device.Location.Long)
 		}
 		newClosest := distance.Closest(target, points)
 		if newClosest.Id == closest.Id {
